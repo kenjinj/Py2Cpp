@@ -1,0 +1,83 @@
+#Fraction sort in python
+#CS460 Spring 2016, HW2
+#Kenji Johnson
+#
+#Time taken: 2 hours to write and debug
+#            2 hours to optimize
+
+import sys
+
+#takes 2 integers and returns 
+#common denominator greatest
+def gcd(a, b):
+    while b != 0:
+        temp = b 
+        b = a % b
+        a = temp
+    return a
+
+def compare(a, b):
+    x = (a[0] * b[1])
+    y = (b[0] * a[1])
+    if (x < y):
+        return -1
+    elif (x == y):
+        return 0
+    else:
+        return 1
+
+inputList=[]
+
+if __name__ == "__main__":  
+    try:
+        #get input from file with exception handling
+        with open(sys.argv[1], 'r') as infile:
+            for line in infile:
+                whole, fract = line.split()
+                whole = int(whole)
+                num, denom = fract.split('/')
+                num = int(num)
+                denom = int(denom)
+
+                #convert to remove whole number
+                if whole > 0:
+                    num += (whole * denom)
+                elif whole < 0:
+                    num = (whole * denom) - num
+
+                #find gdc and reduce
+                x = gcd(abs(num), denom)
+                num //= x
+                denom //= x
+
+                #add to list    
+                inputList.append((num, denom))
+
+    except IOError:
+        print"Cannot open file."
+        sys.exit(1)
+
+    infile.close()
+
+    #sort
+    inputList.sort(cmp=compare)
+
+    #print
+    for fraction in inputList:
+        num = fraction[0]
+        denom = fraction[1]
+        if num < 0:
+            num *= -1
+            whole = -1 * (num // denom)
+            if whole == 0:
+                num *= -1
+        else:
+            whole = num // denom
+        if whole != 0:
+            num %= denom
+        if whole < 0:
+            num = abs(num)
+        if num == 0:
+            denom = 1
+        print"%d %d/%d" % (whole, num, denom)
+   
