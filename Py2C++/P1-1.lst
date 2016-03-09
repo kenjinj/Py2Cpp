@@ -1,0 +1,21 @@
+    1  and as assert break class continue def del elif else except exec finally for
+    2  from global if import in is lambda not or pass raise return try while with
+    3  yield TRUE FALSE None
+    4  
+    5  + - * ** / // % < > <= >= == != () [ ] { } @ , : .  = ; += -= *= /= //= %= **=
+    6  
+    7  abs all any ascii bin bool bytes bytearray chr dict dir divmod enumerate filter
+    8  float format frozenset getattr globals hash hasattr hex input int iter len list
+    9  map max min next object oct open pow print range round reversed set slice sorted
+   10  str sum super tuple
+   11  
+   12  These are some identifiers
+   13  
+   14  123 -456 0 1.1 22.22 3.0 0.4 .
+   15  
+   16  "this is a string"
+   17  'this is another string'
+   18  
+   19  "a" 'b'
+
+0 Error(s) found in P1-1.py

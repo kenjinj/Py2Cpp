@@ -1,0 +1,21 @@
+    1  # Program: CS 115 Lab 6a
+    2  # Author: Your name
+    3  # Description: This program will ask the user for a value
+    4  # and tell the user whether the value is even or odd.
+    5  
+    6  
+    7  def main():
+    8  
+    9  	N = int(input('Enter a number: '))
+   10  
+   11  	if N % 2 == 1:
+   12  		print(&N, 'is odd.')
+Error: Invalid character '&' at 12,9
+   13  	else:
+   14  		print(!N, 'is even.')
+Error: Invalid character 'N' at 14,10
+   15  
+   16  
+   17  main()
+
+2 Error(s) found in P1-3.py

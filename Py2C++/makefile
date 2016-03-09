@@ -1,4 +1,4 @@
-CFLAGS = -std=gnu++11 -O3 -g 
+CFLAGS = -std=gnu++11 -O3 -g -Wall
 
 P1.out : Project1.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o
 	g++ $(CFLAGS) -o P1.out Project1.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o

@@ -17,7 +17,6 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
         t_name = lex->GetTokenName(t);
         l = lex->GetLexeme();
     }
-    lex->ReportError(" Error found in ");
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()

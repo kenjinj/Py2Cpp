@@ -19,5 +19,4 @@
    19  	else:
    20  		return 1
 
-.     .     .
-0 Error found in testFraction.py
+0 Error(s) found in testFraction.py

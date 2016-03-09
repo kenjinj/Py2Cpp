@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <unordered_map>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ enum token_type {NONE = -1, EOF_T, ERROR_T, IDENT_T, INTLIT_T, FLTLIT_T, STRLIT_
                  AT_T, COMMA_T, COLON_T, PERIOD_T, ASSIGN_T, SEMI_T, PLUSEQ_T,
                  MINUSEQ_T, MULTEQ_T, DIVEQ_T, IDIVEQ_T, MODEQ_T, EXPEQ_T, ABS_T,
                  ALL_T, ANY_T, ASCII_T, BIN_T, BOOL_T, BYTEARR_T, BYTE_T, CHR_T,
-                 DICT_T, DIR_T, DIVMD_T, ENUMR_T, FILTR_T, FRMT_T, FZSET_T, GATTR_T,
+                 DICT_T, DIR_T, DIVMD_T, ENUMR_T, FILTR_T, FLOAT_T, FRMT_T, FZSET_T, GATTR_T,
                  GLBLS_T, HATTR_T, HASH_T, HEX_T, INPUT_T, INT_T, ITER_T, LEN_T, 
                  LIST_T, MAP_T, MAX_T, MIN_T, NEXT_T, OBJ_T, OCT_T, OPEN_T, POW_T,
                  PRINT_T, RANGE_T, RVS_T, ROUND_T, SET_T, SLICE_T, SRTD_T, STR_T,
@@ -32,14 +33,14 @@ class LexicalAnalyzer
 	string GetTokenName (token_type t) const;
 	string GetLexeme () const;
 	void ReportError (const string & msg);
+        ofstream debug;
     private:
         void putback(char last);
         string file;
         string fstub;
 	ifstream input;
 	ofstream listing;
-	ofstream debug;
-	token_type token;
+	token_type token; 
 	string line;
 	int linenum;
 	int pos;
@@ -51,6 +52,88 @@ class LexicalAnalyzer
         
         string valid = " a_0.\n\r\t+-*/%<>=!()[]{}@,:;\"\'#\\";
         
+        unordered_map<string, token_type> keyword_map = {
+            {"and",AND_T},
+            {"as",AS_T},
+            {"assert",ASSERT_T},
+            {"break",BREAK_T},
+            {"class",CLASS_T},
+            {"continue",CONT_T},
+            {"def",DEF_T},
+            {"del",DEL_T},
+            {"elif",ELIF_T},
+            {"else",ELSE_T},
+            {"except",EXCEPT_T},
+            {"exec",EXEC_T},
+            {"finally",FINALLY_T},
+            {"for",FOR_T},
+            {"from",FROM_T},
+            {"global",GLOBAL_T},
+            {"if",IF_T},
+            {"import",IMPORT_T},
+            {"in",IN_T},
+            {"is",IS_T},
+            {"lambda",LAMBDA_T},
+            {"not",NOT_T},
+            {"or",OR_T},
+            {"pass",PASS_T},
+            {"raise",RAISE_T},
+            {"return",RETURN_T},
+            {"try",TRY_T},
+            {"while",WHILE_T},
+            {"with",WITH_T},
+            {"yield",YIELD_T},
+            {"TRUE",TRUE_T},
+            {"FALSE",FALSE_T},
+            {"None",NONE_T},
+            {"abs",ABS_T},
+            {"all",ALL_T},
+            {"any",ANY_T},
+            {"ascii",ASCII_T},
+            {"bin",BIN_T},
+            {"bool",BOOL_T},
+            {"bytearray",BYTEARR_T},
+            {"bytes",BYTE_T},
+            {"chr",CHR_T},
+            {"dict",DICT_T},
+            {"dir",DIR_T},
+            {"divmod",DIVMD_T},
+            {"enumerate",ENUMR_T},
+            {"filter",FILTR_T},
+            {"float",FLOAT_T},
+            {"format",FRMT_T},
+            {"frozenset",FZSET_T},
+            {"getattr",GATTR_T},
+            {"globals",GLBLS_T},
+            {"hasattr",HATTR_T},
+            {"hash",HASH_T},
+            {"hex",HEX_T},
+            {"input",INPUT_T},
+            {"int",INT_T},
+            {"iter",ITER_T},
+            {"len",LEN_T},
+            {"list",LIST_T},
+            {"map",MAP_T},
+            {"max",MAX_T},
+            {"min",MIN_T},
+            {"next",NEXT_T},
+            {"object",OBJ_T},
+            {"oct",OCT_T},
+            {"open",OPEN_T},
+            {"pow",POW_T},
+            {"print",PRINT_T},
+            {"range",RANGE_T},
+            {"reversed",RVS_T},
+            {"round",ROUND_T},
+            {"set",SET_T},
+            {"slice",SLICE_T},
+            {"sorted",SRTD_T},
+            {"str",STR_T},
+            {"sum",SUM_T},
+            {"super",SUP_T},
+            {"tuple",TUPL_T}
+        };
+        
         const int stateTable[63][33] = {
             {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
             {-1,62,2,2,4,7,9,10,11,12,15,18,24,30,33,36,39,42,44,45,46,47,48,49,50,51,52,54,55,57,59,-1,-1},
@@ -59,7 +142,7 @@ class LexicalAnalyzer
             {-1,5,5,5,4,6,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
             {-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1},
             {-1,8,8,8,6,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,-1,-1},
-            {-1,53,53,53,6,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,-1,-1},
+            {-1,53,53,53,6,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53},
             {-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             {-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1},
             {-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,-1},
@@ -129,7 +212,7 @@ class LexicalAnalyzer
             "AT_T", "COMMA_T", "COLON_T", "PERIOD_T", "ASSIGN_T", "SEMI_T", "PLUSEQ_T",
             "MINUSEQ_T", "MULTEQ_T", "DIVEQ_T", "IDIVEQ_T", "MODEQ_T", "EXPEQ_T", "ABS_T",
             "ALL_T", "ANY_T", "ASCII_T", "BIN_T", "BOOL_T", "BYTEARR_T", "BYTE_T", "CHR_T",
-            "DICT_T", "DIR_T", "DIVMD_T", "ENUMR_T", "FILTR_T", "FRMT_T", "FZSET_T", "GATTR_T",
+            "DICT_T", "DIR_T", "DIVMD_T", "ENUMR_T", "FILTR_T", "FLOAT_T", "FRMT_T", "FZSET_T", "GATTR_T",
             "GLBLS_T", "HATTR_T", "HASH_T", "HEX_T", "INPUT_T", "INT_T", "ITER_T", "LEN_T", 
             "LIST_T", "MAP_T", "MAX_T", "MIN_T", "NEXT_T", "OBJ_T", "OCT_T", "OPEN_T", "POW_T",
             "PRINT_T", "RANGE_T", "RVS_T", "ROUND_T", "SET_T", "SLICE_T", "SRTD_T", "STR_T",

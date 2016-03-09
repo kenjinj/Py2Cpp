@@ -1,0 +1,64 @@
+    1  # Program: CS 115 Lab 6a
+    2  # Author: Your name
+    3  # Description: This program will ask the user for a value
+    4  # and tell the user whether the value is even or odd.
+    5  
+    6  
+    7  def main():
+			DEF_T          def       
+			IDENT_T        main      
+			LPARENT_T      (         
+			RPAREN_T       )         
+			COLON_T        :         
+    8  
+    9  	N = int(input('Enter a number: '))
+			TAB_T          \t        
+			IDENT_T        N         
+			ASSIGN_T       =         
+			INT_T          int       
+			LPARENT_T      (         
+			INPUT_T        input     
+			LPARENT_T      (         
+			STRLIT_T       'Enter a number: '
+			RPAREN_T       )         
+			RPAREN_T       )         
+   10  
+   11  	if N % 2 == 1:
+			TAB_T          \t        
+			IF_T           if        
+			IDENT_T        N         
+			MOD_T          %         
+			INTLIT_T       2         
+			EQUAL_T        ==        
+			INTLIT_T       1         
+			COLON_T        :         
+   12  		print(N, 'is odd.')
+			TAB_T          \t        
+			TAB_T          \t        
+			PRINT_T        print     
+			LPARENT_T      (         
+			IDENT_T        N         
+			COMMA_T        ,         
+			STRLIT_T       'is odd.' 
+			RPAREN_T       )         
+   13  	else:
+			TAB_T          \t        
+			ELSE_T         else      
+			COLON_T        :         
+   14  		print(N, 'is even.')
+			TAB_T          \t        
+			TAB_T          \t        
+			PRINT_T        print     
+			LPARENT_T      (         
+			IDENT_T        N         
+			COMMA_T        ,         
+			STRLIT_T       'is even.'
+			RPAREN_T       )         
+   15  
+   16  
+   17  main()
+			IDENT_T        main      
+			LPARENT_T      (         
+			RPAREN_T       )         
+
+0 Error(s) found in P1-2.py

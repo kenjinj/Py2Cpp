@@ -1,0 +1,149 @@
+    1  and as assert break class continue def del elif else except exec finally for
+			AND_T          and       
+			AS_T           as        
+			ASSERT_T       assert    
+			BREAK_T        break     
+			CLASS_T        class     
+			CONT_T         continue  
+			DEF_T          def       
+			DEL_T          del       
+			ELIF_T         elif      
+			ELSE_T         else      
+			EXCEPT_T       except    
+			EXEC_T         exec      
+			FINALLY_T      finally   
+			FOR_T          for       
+    2  from global if import in is lambda not or pass raise return try while with
+			FROM_T         from      
+			GLOBAL_T       global    
+			IF_T           if        
+			IMPORT_T       import    
+			IN_T           in        
+			IS_T           is        
+			LAMBDA_T       lambda    
+			NOT_T          not       
+			OR_T           or        
+			PASS_T         pass      
+			RAISE_T        raise     
+			RETURN_T       return    
+			TRY_T          try       
+			WHILE_T        while     
+			WITH_T         with      
+    3  yield TRUE FALSE None
+			YIELD_T        yield     
+			TRUE_T         TRUE      
+			FALSE_T        FALSE     
+			NONE_T         None      
+    4  
+    5  + - * ** / // % < > <= >= == != () [ ] { } @ , : .  = ; += -= *= /= //= %= **=
+			PLUS_T         +         
+			MINUS_T        -         
+			MULT_T         *         
+			EXP_T          **        
+			DIV_T          /         
+			IDIV_T         //        
+			MOD_T          %         
+			LT_T           <         
+			GT_T           >         
+			LTE_T          <=        
+			GTE_T          >=        
+			EQUAL_T        ==        
+			NOTEQ_T        !=        
+			LPARENT_T      (         
+			RPAREN_T       )         
+			LBRACKET_T     [         
+			RBRACKET_T     ]         
+			LBRACE_T       {         
+			RBRACE_T       }         
+			AT_T           @         
+			COMMA_T        ,         
+			COLON_T        :         
+			PERIOD_T       .         
+			ASSIGN_T       =         
+			SEMI_T         ;         
+			PLUSEQ_T       +=        
+			MINUSEQ_T      -=        
+			MULTEQ_T       *=        
+			DIVEQ_T        /=        
+			IDIVEQ_T       //=       
+			MODEQ_T        %=        
+			EXPEQ_T        **=       
+    6  
+    7  abs all any ascii bin bool bytes bytearray chr dict dir divmod enumerate filter
+			ABS_T          abs       
+			ALL_T          all       
+			ANY_T          any       
+			ASCII_T        ascii     
+			BIN_T          bin       
+			BOOL_T         bool      
+			BYTE_T         bytes     
+			BYTEARR_T      bytearray 
+			CHR_T          chr       
+			DICT_T         dict      
+			DIR_T          dir       
+			DIVMD_T        divmod    
+			ENUMR_T        enumerate 
+			FILTR_T        filter    
+    8  float format frozenset getattr globals hash hasattr hex input int iter len list
+			FLOAT_T        float     
+			FRMT_T         format    
+			FZSET_T        frozenset 
+			GATTR_T        getattr   
+			GLBLS_T        globals   
+			HASH_T         hash      
+			HATTR_T        hasattr   
+			HEX_T          hex       
+			INPUT_T        input     
+			INT_T          int       
+			ITER_T         iter      
+			LEN_T          len       
+			LIST_T         list      
+    9  map max min next object oct open pow print range round reversed set slice sorted
+			MAP_T          map       
+			MAX_T          max       
+			MIN_T          min       
+			NEXT_T         next      
+			OBJ_T          object    
+			OCT_T          oct       
+			OPEN_T         open      
+			POW_T          pow       
+			PRINT_T        print     
+			RANGE_T        range     
+			ROUND_T        round     
+			RVS_T          reversed  
+			SET_T          set       
+			SLICE_T        slice     
+			SRTD_T         sorted    
+   10  str sum super tuple
+			STR_T          str       
+			SUM_T          sum       
+			SUP_T          super     
+			TUPL_T         tuple     
+   11  
+   12  These are some identifiers
+			IDENT_T        These     
+			IDENT_T        are       
+			IDENT_T        some      
+			IDENT_T        identifiers
+   13  
+   14  123 -456 0 1.1 22.22 3.0 0.4 .
+			INTLIT_T       123       
+			MINUS_T        -         
+			INTLIT_T       456       
+			INTLIT_T       0         
+			FLTLIT_T       1.1       
+			FLTLIT_T       22.22     
+			FLTLIT_T       3.0       
+			FLTLIT_T       0.4       
+			PERIOD_T       .         
+   15  
+   16  "this is a string"
+			STRLIT_T       "this is a string"
+   17  'this is another string'
+			STRLIT_T       'this is another string'
+   18  
+   19  "a" 'b'
+			STRLIT_T       "a"       
+			STRLIT_T       'b'       
+
+0 Error(s) found in P1-1.py

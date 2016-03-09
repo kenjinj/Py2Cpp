@@ -13,8 +13,6 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
-        <gdb_signals>
-        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -30,8 +28,11 @@
           <runcommandpicklistitem>./P1.out</runcommandpicklistitem>
           <runcommandpicklistitem>./P1.out testFraction</runcommandpicklistitem>
           <runcommandpicklistitem>./P1.out testFraction.py</runcommandpicklistitem>
+          <runcommandpicklistitem>./P1.out P1-1.py</runcommandpicklistitem>
+          <runcommandpicklistitem>./P1.out P1-2.py</runcommandpicklistitem>
+          <runcommandpicklistitem>./P1.out P1-3.py</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>./P1.out testFraction.py</runcommand>
+        <runcommand>./P1.out P1-3.py</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

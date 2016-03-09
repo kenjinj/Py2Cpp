@@ -38,15 +38,15 @@ token_type LexicalAnalyzer::GetToken ()
 {
     // This function will find the next lexeme in the input file and return
     // the token_type value associated with that lexeme
-    cout << "Resetting token, t = " << GetTokenName(token) << endl;
     token = NONE;
-    cout << "Token is now = " << GetTokenName(token) << endl;
     // If position out of current line bounds
-    if (pos >= line.length()){
+    if (pos >= (int)line.length()){
         // Try to get new line from input
-            cout << "GETTING NEW LINE\n";
         getline(input, line);
         if (input.fail()){
+            listing << endl << errors << " Error(s) found in " << file << endl;
+            debug << endl << errors << " Error(s) found in " << file << endl;
+            cout << errors << " Error(s) found in " << file << endl;
             token = EOF_T;
             return token;
         }
@@ -55,31 +55,35 @@ token_type LexicalAnalyzer::GetToken ()
         cs = 1;
         lexeme = "";
         // Write line number and input text to files
+        listing.setf(ios_base::right, ios_base::adjustfield);
+        debug.setf(ios_base::right, ios_base::adjustfield);
+
         listing << setw(5) << linenum << "  " << line << endl;
         debug << setw(5) << linenum << "  " << line << endl;
     }
     // While it is within bounds of current line
-    while (pos <= line.length() && token == NONE){
+    while (pos <= (int)line.length() && token == NONE){
         char c = line[pos++];
+        // Skip null terminator on newlines
         if (lexeme.length() == 0 && c == 0)
             break;
+        // Don't include space if valid lexeme has started
         if (lexeme.length() != 0 || c != ' ')
             lexeme += c;
+        char c_original = c;
         if (isalpha(c)) c = 'a';
         if (isdigit(c)) c = '0';
         int col = 0;
-        while (c != valid[col] && col < valid.length() - 1) col++;
-        col++;
-            cout << "Current state is: " << cs << endl;
-            cout << "Found character in column: " << col << endl;
+        while (c != valid[col] && col < (int)valid.length() - 1) col++;
+        col++; // Solve off by 1 error
         cs = stateTable[cs][col];
-            cout << "State is now: " << cs << endl;
         switch (cs){
             case -1:
                 // ERROR
-                listing << "Error: Invalid character '" << c << "' at " << linenum << "," << pos << endl;
-                debug << "Error: Invalid character '" << c << "' at " << linenum << "," << pos << endl;
+                listing << "Error: Invalid character '" << c_original << "' at " << linenum << "," << pos << endl;
+                debug << "Error: Invalid character '" << c_original << "' at " << linenum << "," << pos << endl;
                 token = ERROR_T;
+                errors++;
                 break;
             case 3:
                 // Identifier found for hash table lookup
@@ -296,14 +300,19 @@ token_type LexicalAnalyzer::GetToken ()
                 token = STRLIT_T;
                 break;
         }
+        // Check for keyword in hash table
+        if (token == IDENT_T){
+            unordered_map<string,token_type>::const_iterator got = keyword_map.find(lexeme);
+                if (got != keyword_map.end())
+                    token = keyword_map.at(lexeme);
+        }
+        // If token found, report token and lexeme to debug file
         if (token != NONE){
-            debug << "\t\t" << GetTokenName(token) << "\t\t" << GetLexeme() << endl;
-                cout << "Token (" << token << ") is: " << GetTokenName(token) << endl;
-                cout << "Lexeme is: " << lexeme << endl;
+            debug.setf(ios_base::left, ios_base::adjustfield);
+            debug << "\t\t\t" << setw(15) << GetTokenName(token) << setw(10) << GetLexeme() << endl;
             lexeme_last = lexeme;
             lexeme = "";
         }
-            cout << endl;
     }
     return token;
 }
@@ -336,9 +345,7 @@ string LexicalAnalyzer::GetLexeme () const
 void LexicalAnalyzer::ReportError (const string & msg)
 {
     // This function will be called to write an error message to a file
-    cout << errors << msg << file << endl;
-    listing << endl << ".     .     .\n" << errors << msg << file << endl;
-    debug << endl << ".     .     .\n" << errors << msg << file << endl;
+    debug << msg << endl;
 }
 
 void LexicalAnalyzer::putback (char last){
