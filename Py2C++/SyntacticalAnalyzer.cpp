@@ -9,12 +9,15 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 {
     lex = new LexicalAnalyzer (filename);
     token_type t;
+    string t_name;
+    string l;
     while ((t = lex->GetToken()) != EOF_T)
     {
-            // get a token
-            // write its name to the debug file
-            // write the corresponding lexeme to the debug file
+        // Got token and lexeme, output handled within Lexical Analyzer
+        t_name = lex->GetTokenName(t);
+        l = lex->GetLexeme();
     }
+    lex->ReportError(" Error found in ");
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()

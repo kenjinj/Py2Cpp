@@ -29,8 +29,9 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>./P1.out</runcommandpicklistitem>
           <runcommandpicklistitem>./P1.out testFraction</runcommandpicklistitem>
+          <runcommandpicklistitem>./P1.out testFraction.py</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>./P1.out testFraction</runcommand>
+        <runcommand>./P1.out testFraction.py</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
