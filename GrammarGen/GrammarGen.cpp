@@ -1,6 +1,6 @@
 /* 
- * File:   main.cpp
- * Author: Kenji
+ * File:   GrammarGen.cpp
+ * Author: Kenji Johnson
  *
  * Created on April 25, 2016, 12:00 AM
  */
@@ -16,6 +16,7 @@
 
 using namespace std;
 
+// Functions to split a string into a vector using a delimeter
 vector<string> &split(const string &s, char delim, vector<string> &elems) {
     stringstream ss(s);
     string item;
@@ -24,34 +25,38 @@ vector<string> &split(const string &s, char delim, vector<string> &elems) {
     }
     return elems;
 }
-
-
 vector<string> split(const string &s, char delim) {
     vector<string> elems;
     split(s, delim, elems);
     return elems;
 }
 
+// Data type for parsed input lines
 struct Rule{
     string start;
     vector<string> results;
 };
 
+// Data types to store firsts and follows for each NT key
 struct FandF{
     string key;
     vector<string> firsts;
-    vector<string> temp;
     vector<string> follows;
 };
 
+// Helper function for sorting
 bool ruleListCompare (FandF a, FandF b){
     return (a.key < b.key);
 }
 
+// Vector for parsed input
 vector<Rule> inputList;
+// Vector of unique non-terminals and its firsts and follows
 vector<FandF> ruleList;
+// Metrics for number of times rules applied
 int aCount, bCount, cCount, dCount, eCount, fCount;
 
+// Helper function to find index of non-terminal(string) in FF vector
 int findKeyIndex(string toFind){
     for (int i = 0; i < ruleList.size(); i++){
         if (toFind == ruleList[i].key) return i;
@@ -190,7 +195,7 @@ void ruleF(int listIndex){
 }
 
 /*
- * 
+ * Main function
  */
 int main(int argc, char** argv) {
     ifstream input;	
@@ -248,25 +253,32 @@ int main(int argc, char** argv) {
         ruleD(i);
     }
     fprintf(report, "Non-dependent Report (Rules A, B, D):\n\t%d new firsts, %d new follows\n", aCount, dCount);
+    
     // Find follows dependent on firsts, need to recheck after final firsts.
     for (int i = 0; i < inputList.size(); i++){
         ruleE(i);
     }
+    
     // Find follows dependent on other follows, need to recheck after final follows.
     for (int i = 0; i < inputList.size(); i++){
         ruleF(i);
     }
     fprintf(report, "F&F-dependent Report (Rules E, F):\n\t%d new follows\n", eCount + fCount);
+    
     /* Initial follows found */
     fprintf(report, "Initial set of follows found\n");
+    
     // Find firsts dependent on follows, need to recheck after final follows
     for (int i = 0; i < inputList.size(); i++){
         ruleC(i);
     }
     fprintf(report, "Follows-dependent Report (Rule C):\n\t%d new firsts\n", cCount);
+    
     /* Initial firsts found */
     fprintf(report, "Initial set of firsts found\n");
-    fprintf(report, "F&F-Dependent Report(Rules E, F, C in loop):\n");
+    
+    // Find remaining F&F with inter dependencies, finished when no change detected
+    fprintf(report, "F&F-Dependent Report (Rules E, F, C in loop):\n");
     int firstsTemp;
     int followsTemp; 
     do{
@@ -307,6 +319,8 @@ int main(int argc, char** argv) {
     
     fclose(report);
     fclose(grammarFF);
+    
+    cout << "GrammarGen execution complete.\n\tReport saved to GrammarGenReport.txt\n\tList of firsts and follows saved to GrammarFirstsFollows.txt\n";
     
     return 0;
 }
