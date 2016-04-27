@@ -1,14 +1,14 @@
 Grammar.part1 : <file_input> -> NL_T <file_input>
-Grammar.part1 : <file_input> -> <stmt> < file_input>
+Grammar.part1 : <file_input> -> <stmt> <file_input>
 Grammar.part1 : <file_input> -> EOF_T
-Grammar.part1 : <decorator> -> AT_T <dotted_name> <d_option> NL_T 
+Grammar.part1 : <decorator> -> AT_T <dotted_name> <d_option> NL_T
 Grammar.part1 : <d_option> -> {}
 Grammar.part1 : <d_option> -> LPAREN_T <dec_arglist> RPAREN_T
 Grammar.part1 : <dec_arglist> -> {}
 Grammar.part1 : <dec_arglist> -> <arglist>
 Grammar.part1 : <decorators> -> <decorator> <d_option>
 Grammar.part1 : <d_option> -> <decorator> <d_option>
-Grammar.part1 : <d_option) -> {}
+Grammar.part1 : <d_option> -> {}
 Grammar.part1 : <decorated> -> <decorators> <def_o>
 Grammar.part1 : <def_o> -> <classdef>
 Grammar.part1 : <def_o> -> <funcdef>
@@ -43,7 +43,7 @@ Grammar.part1 : <fpdef_opt> -> {}
 Grammar.part1 : <fpdef_opt> -> COMMA_T <fpdef> <fpdef_opt>
 Grammar.part1 : <optComma> -> {}
 Grammar.part1 : <optComma> -> COMMA_T
-Grammar.part1 : <stmt> -> <Simple_stmt>
+Grammar.part1 : <stmt> -> <simple_stmt>
 Grammar.part1 : <stmt> -> <compound_stmt>
 Grammar.part2 : <augassign> -> PLUSEQ_T
 Grammar.part2 : <augassign> -> MINUSEQ_T
@@ -56,18 +56,18 @@ Grammar.part2 : <augassign> -> ‘<<=’
 Grammar.part2 : <augassign> -> ‘>>=’
 Grammar.part2 : <augassign> -> EXPEQ_T
 Grammar.part2 : <augassign> -> IDIVEQ_T
-Grammar.part2 : <print_stmt> -> ‘print’<print_tail>
+Grammar.part2 : <print_stmt> -> ‘print’ <print_tail>
 Grammar.part2 : <print_tail> -> <optprint_tail>
-Grammar.part2 : <print_tail> -> ‘>>’<test><print_element>
+Grammar.part2 : <print_tail> -> ‘>>’ <test> <print_element>
 Grammar.part2 : <optprint_tail> -> {}
-Grammar.part2 : <optprint_tail> -> <test><print_rec><optcomma>
-Grammar.part2 : <print_rec> -> ‘,’<test><print_rec>
-Grammar.part2 : <print_rec> -> ‘,’<test>
-Grammar.part2 : <print_element> -> ‘,’<test><print_element><optcomma>
-Grammar.part2 : <print_element> -> ‘,’<test><optcomma>
+Grammar.part2 : <optprint_tail> -> <test> <print_rec> <optcomma>
+Grammar.part2 : <print_rec> -> ‘,’ <test> <print_rec>
+Grammar.part2 : <print_rec> -> ‘, ’<test>
+Grammar.part2 : <print_element> -> ‘,’ <test> <print_element> <optcomma>
+Grammar.part2 : <print_element> -> ‘,’ <test> <optcomma>
 Grammar.part2 : <opt_print_element> -> <print_element>
 Grammar.part2 : <opt_print_element> -> {}
-Grammar.part2 : <del_stmt> -> ‘del’<exprlist>
+Grammar.part2 : <del_stmt> -> ‘del’ <exprlist>
 Grammar.part2 : <pass_stmt> -> ‘pass’
 Grammar.part2 : <flow_stmt> -> <break_stmt>
 Grammar.part2 : <flow_stmt> -> <continue_stmt>
@@ -76,12 +76,12 @@ Grammar.part2 : <flow_stmt> -> <raise_stmt>
 Grammar.part2 : <flow_stmt> -> <yield_stmt>
 Grammar.part2 : <break_stmt> -> ‘break’
 Grammar.part2 : <continue_stmt> -> ‘continue’
-Grammar.part2 : <return_stmt> -> ‘return’<opt_testlist>
+Grammar.part2 : <return_stmt> -> ‘return’ <opt_testlist>
 Grammar.part2 : <opt_testlist> -> <test_list>
 Grammar.part2 : <opt_testlist> -> {}
-Grammar.part2 : <simple_stmt> -> <small_stmt><opt_tail><optsemi>NL_T
-Grammar.part2 : <simple_stmt> -> <small_stmt><opt_tail><optsemi>CR_T
-Grammar.part2 : <opt_tail> -> ‘,’<small_stmt>
+Grammar.part2 : <simple_stmt> -> <small_stmt> <opt_tail> <optsemi> NL_T
+Grammar.part2 : <simple_stmt> -> <small_stmt> <opt_tail> <optsemi> CR_T
+Grammar.part2 : <opt_tail> -> ‘,’ <small_stmt>
 Grammar.part2 : <opt_tail> -> {}
 Grammar.part2 : <optsemi> -> ‘;’
 Grammar.part2 : <optsemi> -> {}
@@ -95,16 +95,17 @@ Grammar.part2 : <small_stmt> -> <global_stmt>
 Grammar.part2 : <small_stmt> -> <exec_stmt>
 Grammar.part2 : <small_stmt> -> <assert_stmt>
 Grammar.part2 : <expr_stmt> -> <testlist>
-Grammar.part2 : <testlist> -> <augassign><yield_expr>
-Grammar.part2 : <testlist> -> <augassign><testlist>
-Grammar.part2 : <testlist> -> ‘=’<yield_expr>
-Grammar.part2 : <testlist> -> ‘=’<testlist>
+Grammar.part2 : <testlist> -> <augassign> <yield_expr>
+Grammar.part2 : <testlist> -> <augassign> <testlist>
+Grammar.part2 : <testlist> -> ‘=’ <yield_expr>
+Grammar.part2 : <testlist> -> ‘=’ <testlist>
 Grammar.part2 : <testlist> -> {}
 Grammar.part3 : <yield_stmt> -> <yield_expr>
-Grammar.part3 : <raise_stmt> -> RAISE_T
-Grammar.part3 : <raise_stmt> -> RAISE_T <test>
-Grammar.part3 : <raise_stmt> -> RAISE_T <test> COMMA_T <test>
-Grammar.part3 : <raise_stmt> -> RAISE_T <test> COMMA_T <test> COMMA_T <test>
+Grammar.part3 : <raise_stmt> -> RAISE_T <test> <raise_tail>
+Grammar.part3 : <raise_tail> -> {}
+Grammar.part3 : <raise_tail> -> COMMA_T <test> <raise_tail2>
+Grammar.part3 : <raise_tail2> -> {}
+Grammar.part3 : <raise_tail2> -> COMMA_T <test>
 Grammar.part3 : <import_stmt> -> <import_name>
 Grammar.part3 : <import_stmt> -> <import_from>
 Grammar.part3 : <import_name> -> IMPORT_T <dotted_as_name>
@@ -130,6 +131,7 @@ Grammar.part3 : <dotted_name_period> -> PERIOD_T IDENT_T <dotted_name_period>
 Grammar.part3 : <dotted_name_period> -> {}
 Grammar.part4 : <global_stmt> -> GLOBAL_T IDENT_T <global_stmt_tail>
 Grammar.part4 : <global_stmt_tail> -> COMMA_T IDENT_T <global_stmt_tail>
+Grammar.part4 : <global_stmt_tail> -> LAMBDA_T
 Grammar.part4 : <exec_stmt> -> EXEC_T <expr> <exec_stmt_tail>
 Grammar.part4 : <exec_stmt_tail> -> IN_T <test> <exec_stmt_tail_tail>
 Grammar.part4 : <exec_stmt_tail_tail> -> COMMA_T <test>
@@ -149,7 +151,7 @@ Grammar.part4 : <compund_stmt> -> <def>
 Grammar.part4 : <compund_stmt> -> <decorated>
 Grammar.part4 : <if_stmt> -> IF_T <test> COLON_T <suite> <else_stmt>
 Grammar.part4 : <else_stmt> -> ELSE_T COLON_T <suite>
-Grammar.part4 : <else_stmt> -> {}>
+Grammar.part4 : <else_stmt> -> {}
 Grammar.part4 : <while_stmt> -> WHILE_T <test> COLON_T <suite> <else_stmt>
 Grammar.part4 : <with_item> -> <test> <test_tail>
 Grammar.part4 : <test_tail> -> AS_T <expo>
@@ -226,7 +228,6 @@ Grammar.part6 : <shift_dir> -> '>>'
 Grammar.part6 : <expr_arith_expr> -> {}
 Grammar.part6 : <arith_expr> -> <term> <expr_term>
 Grammar.part6 : <expr_term> -> <plus_or_minus> <term> <expr_term>
-Grammar.part6 : <plus_or_minus> -> PERIOD_T
 Grammar.part6 : <plus_or_minus> -> PERIOD_T
 Grammar.part6 : <expr_term> -> {}
 Grammar.part6 : <term> -> <factor> <expr_factor>
