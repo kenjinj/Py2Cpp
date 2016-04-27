@@ -252,7 +252,9 @@ int main(int argc, char** argv) {
         // follows
         ruleD(i);
     }
-    fprintf(report, "Non-dependent Report (Rules A, B, D):\n\t%d new firsts, %d new follows\n", aCount, dCount);
+    // fix counter
+    aCount -= bCount;
+    fprintf(report, "Non-dependent Report (Rules A, B, D):\n\t%d new firsts, %d new follows\n", aCount + bCount, dCount);
     
     // Find follows dependent on firsts, need to recheck after final firsts.
     for (int i = 0; i < inputList.size(); i++){
@@ -313,7 +315,7 @@ int main(int argc, char** argv) {
     }
     
     fprintf(report, "\nFinished finding all firsts and follows\n");
-    fprintf(report, "Rule A applied %d times.\nRule B applied %d times.\n", aCount-bCount, bCount);
+    fprintf(report, "Rule A applied %d times.\nRule B applied %d times.\n", aCount, bCount);
     fprintf(report, "Rule C applied %d times.\nRule D applied %d times.\n", cCount, dCount);
     fprintf(report, "Rule E applied %d times.\nRule F applied %d times.\n", eCount, fCount);
     

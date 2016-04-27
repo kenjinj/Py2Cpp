@@ -11,7 +11,7 @@ Initial set of follows found
 Follows-dependent Report (Rule C):
 	82 new firsts
 Initial set of firsts found
-F&F-Dependent Report(Rules E, F, C in loop):
+F&F-Dependent Report (Rules E, F, C in loop):
 	42 new firsts, 159 new follows
 	25 new firsts, 80 new follows
 	10 new firsts, 19 new follows
