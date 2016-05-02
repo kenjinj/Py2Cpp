@@ -1,33 +1,33 @@
-Starting generation of firsts and follows on file 'Grammar.txt'
+Starting generation of firsts and follows on file 'input.txt'
 
 Input format:
-Grammar.part1 : <file_input> -> NL_T <file_input>
+<file_input> -> NL_T <file_input>
 
 Non-dependent Report (Rules A, B, D):
-	593 new firsts, 30 new follows
+	565 new firsts, 27 new follows
 F&F-dependent Report (Rules E, F):
-	391 new follows
+	307 new follows
 Initial set of follows found
 Follows-dependent Report (Rule C):
-	82 new firsts
+	63 new firsts
 Initial set of firsts found
 F&F-Dependent Report (Rules E, F, C in loop):
-	42 new firsts, 159 new follows
-	25 new firsts, 80 new follows
-	10 new firsts, 19 new follows
-	10 new firsts, 30 new follows
-	8 new firsts, 16 new follows
-	8 new firsts, 18 new follows
-	8 new firsts, 17 new follows
-	8 new firsts, 26 new follows
-	6 new firsts, 24 new follows
-	3 new firsts, 21 new follows
+	22 new firsts, 70 new follows
+	20 new firsts, 62 new follows
+	11 new firsts, 32 new follows
+	9 new firsts, 28 new follows
+	7 new firsts, 19 new follows
+	6 new firsts, 18 new follows
+	5 new firsts, 14 new follows
+	4 new firsts, 18 new follows
+	2 new firsts, 8 new follows
+	1 new firsts, 7 new follows
 	0 new firsts, 0 new follows
 
 Finished finding all firsts and follows
-Rule A applied 192 times.
-Rule B applied 401 times.
-Rule C applied 210 times.
-Rule D applied 30 times.
-Rule E applied 293 times.
-Rule F applied 508 times.
+Rule A applied 189 times.
+Rule B applied 376 times.
+Rule C applied 150 times.
+Rule D applied 27 times.
+Rule E applied 273 times.
+Rule F applied 310 times.

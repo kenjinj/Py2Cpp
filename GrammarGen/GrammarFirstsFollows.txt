@@ -39,8 +39,8 @@
 	Follows: COMMA_T RPAREN_T {} 
 
 <and_expr>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <and_not_test_list_option>
 	Firsts: AND_T OR_T {} 
@@ -74,29 +74,37 @@
 	Firsts: LAMBDA_T NOT_T 
 	Follows: COMMA_T {} 
 
+<argument_tail1>
+	Firsts: LAMBDA_T NOT_T 
+	Follows: COMMA_T {} 
+
+<argument_tail2>
+	Firsts: LAMBDA_T NOT_T 
+	Follows: COMMA_T {} 
+
 <arith_expr>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <assert_stmt>
 	Firsts: ASSERT_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <assert_stmt_tail>
-	Firsts: COMMA_T CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: COMMA_T {} 
+	Follows: 
 
 <atom>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' IDENT_T LBRACE_T LBRACKET_T LPAREN_T 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <augassign>
-	Firsts: '&=' DIVEQ_T EXPEQ_T IDIVEQ_T MINUSEQ_T MODEQ_T PLUSEQ_T ‘<<=’ ‘>>=’ ‘^=’ ‘|=’ 
-	Follows: '&=' CR_T DIVEQ_T EXPEQ_T IDIVEQ_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RPAREN_T YIELD_T {} ‘,’ ‘;’ ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘|=’ 
+	Firsts: DIVEQ_T EXPEQ_T IDIV_T MINUSEQ_T MODEQ_T MULTEQ_T 
+	Follows: ASSIGN_T DIVEQ_T EXPEQ_T IDIV_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T RPAREN_T YIELD_T {} 
 
 <break_stmt>
-	Firsts: ‘break’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: BREAK_T 
+	Follows: 
 
 <classdef>
 	Firsts: CLASS_T 
@@ -135,15 +143,15 @@
 	Follows: AND_T OR_T {} 
 
 <compund_stmt>
-	Firsts: AT_T DEF_T IF_T TRY_T WHILE_T WITH_T 
+	Firsts: DEF_T IDENT_T IF_T TRY_T WHILE_T WITH_T 
 	Follows: 
 
 <continue_stmt>
-	Firsts: ‘continue’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: CONT_T 
+	Follows: 
 
 <d_option>
-	Firsts: AT_T CLASS_T DEF_T LPAREN_T NL_T {} 
+	Firsts: CLASS_T DEF_T IDENT_T LPAREN_T NL_T {} 
 	Follows: CLASS_T DEF_T NL_T 
 
 <dec_arglist>
@@ -151,15 +159,15 @@
 	Follows: RPAREN_T 
 
 <decorated>
-	Firsts: AT_T 
+	Firsts: IDENT_T 
 	Follows: 
 
 <decorator>
-	Firsts: AT_T 
-	Follows: AT_T CLASS_T DEF_T LPAREN_T NL_T {} 
+	Firsts: IDENT_T 
+	Follows: CLASS_T DEF_T IDENT_T LPAREN_T NL_T {} 
 
 <decorators>
-	Firsts: AT_T 
+	Firsts: IDENT_T 
 	Follows: CLASS_T DEF_T 
 
 <def_o>
@@ -167,8 +175,8 @@
 	Follows: 
 
 <del_stmt>
-	Firsts: ‘del’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: DEL_T 
+	Follows: 
 
 <dictor_option1>
 	Firsts: LAMBDA_T NOT_T 
@@ -184,11 +192,11 @@
 
 <dictorsetmaker_opt>
 	Firsts: LBRACE_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <dotted_as_name>
 	Firsts: AS_T IDENT_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <dotted_as_names>
 	Firsts: AS_T COMMA_T IDENT_T 
@@ -196,11 +204,11 @@
 
 <dotted_name>
 	Firsts: IDENT_T 
-	Follows: AT_T CLASS_T CR_T DEF_T IMPORT_T LPAREN_T NL_T {} ‘,’ ‘;’ 
+	Follows: CLASS_T DEF_T IDENT_T IMPORT_T LPAREN_T NL_T {} 
 
 <dotted_name_period>
-	Firsts: AT_T CLASS_T CR_T DEF_T IMPORT_T LPAREN_T NL_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: AT_T CLASS_T CR_T DEF_T IMPORT_T LPAREN_T NL_T {} ‘,’ ‘;’ 
+	Firsts: CLASS_T DEF_T IDENT_T IMPORT_T LPAREN_T NL_T PERIOD_T {} 
+	Follows: CLASS_T DEF_T IDENT_T IMPORT_T LPAREN_T NL_T {} 
 
 <else_stmt>
 	Firsts: ELSE_T {} 
@@ -212,87 +220,87 @@
 
 <except_clause>
 	Firsts: 
-	Follows: : 
+	Follows: COLON_T 
 
 <except_clause_test>
 	Firsts: LAMBDA_T NOT_T 
-	Follows: : 
+	Follows: COLON_T 
 
 <exec_stmt>
 	Firsts: EXEC_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <exec_stmt_tail>
-	Firsts: CR_T IN_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: IN_T {} 
+	Follows: 
 
 <exec_stmt_tail_tail>
-	Firsts: COMMA_T CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: COMMA_T {} 
+	Follows: 
 
 <expr>
 	Firsts: 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T {} ‘,’ ‘;’ 
+	Follows: AND_T COMMA_T IN_T OR_T {} 
 
 <expr_and_expr>
-	Firsts: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '^' '|' AND_T COMMA_T IN_T OR_T {} 
+	Follows: '|' AND_T COMMA_T IN_T OR_T {} 
 
 <expr_arith_expr>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T OR_T {} 
+	Follows: '&' '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <expr_factor>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T DIV_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T MINUS_T OR_T PLUS_T {} 
 
 <expr_multiple>
 	Firsts: COMMA_T {} 
 	Follows: 
 
 <expr_shift_expr>
-	Firsts: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '^' '|' AND_T COMMA_T IN_T OR_T {} 
+	Follows: '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <expr_stmt>
-	Firsts: '&=' DIVEQ_T EXPEQ_T IDIVEQ_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘|=’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: ASSIGN_T DIVEQ_T EXPEQ_T IDIV_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T {} 
+	Follows: 
 
 <expr_term>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T MINUS_T OR_T PLUS_T {} 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <expr_xor_expr>
-	Firsts: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T {} ‘,’ ‘;’ 
+	Firsts: '|' AND_T COMMA_T IN_T OR_T {} 
+	Follows: AND_T COMMA_T IN_T OR_T {} 
 
 <exprlist>
 	Firsts: 
-	Follows: CR_T IN_T NL_T {} ‘,’ ‘;’ 
+	Follows: IN_T 
 
 <factor>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
 
 <factor_options>
-	Firsts: PERIOD_T 
-	Follows: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
+	Firsts: '~' MINUS_T PLUS_T 
+	Follows: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
 
 <file_input>
-	Firsts: '&=' ASSERT_T DIVEQ_T EOF_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EOF_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NL_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 	Follows: 
 
 <flow_stmt>
-	Firsts: RAISE_T YIELD_T ‘break’ ‘continue’ ‘return’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: BREAK_T CONT_T RAISE_T RETURN_T YIELD_T 
+	Follows: 
 
 <fpdef>
 	Firsts: IDENT_T LPAREN_T 
-	Follows:  ASSIGN_T COMMA_T RPAREN_T {} 
+	Follows: ASSIGN_T COMMA_T RPAREN_T {} 
 
 <fpdef_opt>
-	Firsts:  COMMA_T {} 
-	Follows:  
+	Firsts: COMMA_T RPAREN_T {} 
+	Follows: COMMA_T RPAREN_T {} 
 
 <fplist>
 	Firsts: IDENT_T LPAREN_T 
@@ -304,58 +312,66 @@
 
 <global_stmt>
 	Firsts: GLOBAL_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <global_stmt_tail>
-	Firsts: COMMA_T CR_T LAMBDA_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: COMMA_T LAMBDA_T 
+	Follows: 
 
 <if_else_test_option>
-	Firsts: : AS_T COLON_T COMMA_T CR_T FOR_T IF_T NL_T PERIOD_T RPAREN_T {} ‘, ‘,’ ‘;’ 
-	Follows: : AS_T COLON_T COMMA_T CR_T FOR_T NL_T PERIOD_T RPAREN_T {} ‘, ‘,’ ‘;’ 
+	Firsts: '`' ASSIGN_T AS_T COLON_T COMMA_T FOR_T IF_T RPAREN_T {} 
+	Follows: '`' ASSIGN_T AS_T COLON_T COMMA_T FOR_T RPAREN_T {} 
 
 <if_stmt>
 	Firsts: IF_T 
 	Follows: 
 
+<import_as_name1>
+	Firsts: IDENT_T 
+	Follows: 
+
 <import_as_name>
 	Firsts: IDENT_T 
-	Follows: COMMA_T CR_T NL_T RPAREN_T {} ‘,’ ‘;’ 
+	Follows: COMMA_T RPAREN_T 
+
+<import_as_names1>
+	Firsts: COMMA_T 
+	Follows: 
 
 <import_as_names>
 	Firsts: COMMA_T IDENT_T 
-	Follows: CR_T NL_T RPAREN_T {} ‘,’ ‘;’ 
+	Follows: RPAREN_T 
 
 <import_from>
 	Firsts: FROM_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <import_name>
 	Firsts: IMPORT_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <import_stmt>
 	Firsts: FROM_T IMPORT_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <lambdef>
 	Firsts: LAMBDA_T 
-	Follows: : AS_T COLON_T COMMA_T CR_T FOR_T NL_T PERIOD_T RPAREN_T {} ‘, ‘,’ ‘;’ 
+	Follows: '`' ASSIGN_T AS_T COLON_T COMMA_T FOR_T RPAREN_T {} 
 
 <list_for>
 	Firsts: FOR_T 
 	Follows: RBRACKET_T 
 
 <list_if>
-	Firsts: NOT_T 
+	Firsts: IF_T 
 	Follows: RBRACKET_T 
 
 <list_iter>
-	Firsts: FOR_T NOT_T 
+	Firsts: FOR_T IF_T 
 	Follows: RBRACKET_T 
 
 <list_iter_o>
-	Firsts: FOR_T NOT_T RBRACKET_T {} 
+	Firsts: FOR_T IF_T RBRACKET_T {} 
 	Follows: RBRACKET_T 
 
 <list_mak_o>
@@ -368,7 +384,7 @@
 
 <listmaker_opt>
 	Firsts: LBRACKET_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <many_test>
 	Firsts: COMMA_T {} 
@@ -387,32 +403,32 @@
 	Follows: COMMA_T FOR_T IF_T LAMBDA_T NOT_T RBRACE_T RBRACKET_T {} 
 
 <operator>
-	Firsts: DIV_T IDIV_T MULT_T PERIOD_T 
-	Follows: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
+	Firsts: DIV_T IDIV_T MOD_T MULT_T 
+	Follows: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
 
 <optComma>
 	Firsts: COMMA_T RPAREN_T {} 
 	Follows: RPAREN_T 
 
 <opt_expon_fact>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
 
 <opt_print_element>
-	Firsts: {} ‘,’ 
+	Firsts: COMMA_T {} 
 	Follows: 
 
-<opt_tail>
-	Firsts: CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘;’ 
+<opt_tail
+	Firsts: -> 
+	Follows: 
 
 <opt_test>
 	Firsts: COLON_T LPAREN_T {} 
 	Follows: COLON_T 
 
 <opt_testlist>
-	Firsts: CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: {} 
+	Follows: 
 
 <option1_multiple>
 	Firsts: COMMA_T {} 
@@ -440,19 +456,19 @@
 
 <options2>
 	Firsts: COMMA_T IDENT_T LPAREN_T MULT_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <options3>
 	Firsts: IDENT_T IMPORT_T PERIOD_T {} 
 	Follows: IDENT_T IMPORT_T 
 
 <optprint_tail>
-	Firsts: CR_T LAMBDA_T NL_T NOT_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: LAMBDA_T NOT_T {} 
+	Follows: 
 
 <optsemi>
-	Firsts: CR_T NL_T {} ‘;’ 
-	Follows: CR_T NL_T 
+	Firsts: SEMI_T {} 
+	Follows: 
 
 <or_and_test_list_option>
 	Firsts: OR_T {} 
@@ -460,95 +476,99 @@
 
 <or_test>
 	Firsts: NOT_T 
-	Follows: : AS_T COLON_T COMMA_T CR_T ELSE_T FOR_T IF_T LAMBDA_T NL_T NOT_T PERIOD_T RBRACE_T RBRACKET_T RPAREN_T {} ‘, ‘,’ ‘;’ 
+	Follows: '`' ASSIGN_T AS_T COLON_T COMMA_T ELSE_T FOR_T IF_T LAMBDA_T NOT_T RBRACE_T RBRACKET_T RPAREN_T {} 
 
 <parameters>
 	Firsts: LPAREN_T 
 	Follows: COLON_T 
 
 <pass_stmt>
-	Firsts: ‘pass’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: PASS_T 
+	Follows: 
 
 <plus_or_minus>
-	Firsts: PERIOD_T 
-	Follows: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
+	Firsts: MINUS_T PLUS_T 
+	Follows: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
 
 <power>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' IDENT_T LBRACE_T LBRACKET_T LPAREN_T 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
 
 <print_element>
-	Firsts: ‘,’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: COMMA_T 
+	Follows: 
 
 <print_rec>
-	Firsts: ‘, ‘,’ 
+	Firsts: COMMA_T 
 	Follows: 
 
 <print_stmt>
-	Firsts: ‘print’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: PRINT_T 
+	Follows: 
 
 <print_tail>
-	Firsts: LAMBDA_T NOT_T {} ‘>>’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: '>>' LAMBDA_T NOT_T {} 
+	Follows: 
+
+<raise_stmt1>
+	Firsts: RAISE_T 
+	Follows: 
+
+<raise_stmt2>
+	Firsts: RAISE_T 
+	Follows: 
+
+<raise_stmt3>
+	Firsts: RAISE_T 
+	Follows: 
 
 <raise_stmt>
 	Firsts: RAISE_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
-
-<raise_tail2>
-	Firsts: COMMA_T CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
-
-<raise_tail>
-	Firsts: COMMA_T CR_T NL_T {} ‘,’ ‘;’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 
 <recursive_trailer>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T MINUS_T MOD_T MULT_T OR_T PLUS_T {} 
 
 <return_stmt>
-	Firsts: ‘return’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: RETURN_T 
+	Follows: 
 
 <shift_dir>
 	Firsts: '<<' '>>' 
-	Follows: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
+	Follows: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
 
 <shift_expr>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '&' '^' '|' AND_T COMMA_T IN_T OR_T {} 
 
 <simple_stmt>
-	Firsts: '&=' ASSERT_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
-	Follows: '&=' ASSERT_T DEDENT DIVEQ_T ELSE_T EOF_T EXEC_T EXPEQ_T FINALLY_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
+	Follows: ASSERT_T ASSIGN_T BREAK_T CONT_T DEDENT DEL_T DIVEQ_T ELSE_T EOF_T EXEC_T EXPEQ_T FINALLY_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NL_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 
 <sliceop>
 	Firsts: COLON_T 
 	Follows: 
 
 <small_stmt>
-	Firsts: '&=' ASSERT_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
+	Follows: 
 
 <stmt>
-	Firsts: '&=' ASSERT_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
-	Follows: '&=' ASSERT_T DEDENT DIVEQ_T EOF_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
+	Follows: ASSERT_T ASSIGN_T BREAK_T CONT_T DEDENT DEL_T DIVEQ_T EOF_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NL_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 
 <stmt_list>
-	Firsts: '&=' ASSERT_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 	Follows: DEDENT 
 
 <stmt_list_tail>
-	Firsts: '&=' ASSERT_T DEDENT DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEDENT DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 	Follows: DEDENT 
 
 <string_more>
-	Firsts: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <sub_multiple>
 	Firsts: COMMA_T {} 
@@ -563,16 +583,16 @@
 	Follows: RBRACKET_T 
 
 <suite>
-	Firsts: '&=' ASSERT_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIVEQ_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RAISE_T YIELD_T {} ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘break’ ‘continue’ ‘del’ ‘pass’ ‘print’ ‘return’ ‘|=’ 
+	Firsts: ASSERT_T ASSIGN_T BREAK_T CONT_T DEL_T DIVEQ_T EXEC_T EXPEQ_T FROM_T GLOBAL_T IDIV_T IMPORT_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NL_T NOT_T PASS_T PRINT_T RAISE_T RETURN_T YIELD_T {} 
 	Follows: ELSE_T FINALLY_T {} 
 
 <term>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T IN_T MINUS_T OR_T PLUS_T {} 
 
 <test>
 	Firsts: LAMBDA_T NOT_T 
-	Follows: : AS_T COLON_T COMMA_T CR_T FOR_T NL_T PERIOD_T RPAREN_T {} ‘, ‘,’ ‘;’ 
+	Follows: '`' ASSIGN_T AS_T COLON_T COMMA_T FOR_T RPAREN_T {} 
 
 <test_multiple>
 	Firsts: COMMA_T {} 
@@ -583,48 +603,48 @@
 	Follows: RBRACKET_T 
 
 <test_tail>
-	Firsts: : AS_T COMMA_T {} 
-	Follows: : COMMA_T {} 
+	Firsts: AS_T COLON_T COMMA_T {} 
+	Follows: COLON_T COMMA_T {} 
 
 <testlist1>
 	Firsts: LAMBDA_T NOT_T 
-	Follows: PERIOD_T 
+	Follows: '`' 
 
 <testlist1_o>
-	Firsts: COMMA_T PERIOD_T {} 
-	Follows: PERIOD_T 
+	Firsts: '`' COMMA_T {} 
+	Follows: '`' 
 
 <testlist>
-	Firsts: '&=' CR_T DIVEQ_T EXPEQ_T IDIVEQ_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RPAREN_T {} ‘,’ ‘;’ ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘|=’ 
-	Follows: CR_T NL_T RPAREN_T {} ‘,’ ‘;’ 
+	Firsts: ASSIGN_T DIVEQ_T EXPEQ_T IDIV_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T RPAREN_T {} 
+	Follows: RPAREN_T 
 
 <testlist_1>
-	Firsts: PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <testlist_comp>
 	Firsts: LAMBDA_T NOT_T 
 	Follows: 
 
 <testlist_o>
-	Firsts: '&=' CR_T DIVEQ_T EXPEQ_T IDIVEQ_T LAMBDA_T MINUSEQ_T MODEQ_T NL_T NOT_T PLUSEQ_T RPAREN_T {} ‘,’ ‘;’ ‘<<=’ ‘=’ ‘>>=’ ‘^=’ ‘|=’ 
-	Follows: CR_T NL_T RPAREN_T {} ‘,’ ‘;’ 
+	Firsts: ASSIGN_T DIVEQ_T EXPEQ_T IDIV_T LAMBDA_T MINUSEQ_T MODEQ_T MULTEQ_T NOT_T RPAREN_T {} 
+	Follows: RPAREN_T 
 
 <testlist_safe>
 	Firsts: NOT_T 
-	Follows: FOR_T NOT_T RBRACKET_T {} 
+	Follows: FOR_T IF_T RBRACKET_T {} 
 
 <testlist_safe_old_test_list>
 	Firsts: COMMA_T 
-	Follows: FOR_T NOT_T RBRACKET_T {} 
+	Follows: FOR_T IF_T RBRACKET_T {} 
 
 <testlist_safe_old_test_lst_tail>
 	Firsts: COMMA_T 
-	Follows: FOR_T NOT_T RBRACKET_T {} 
+	Follows: FOR_T IF_T RBRACKET_T {} 
 
 <testlist_safe_old_test_option>
-	Firsts: COMMA_T FOR_T NOT_T RBRACKET_T {} 
-	Follows: FOR_T NOT_T RBRACKET_T {} 
+	Firsts: COMMA_T FOR_T IF_T RBRACKET_T {} 
+	Follows: FOR_T IF_T RBRACKET_T {} 
 
 <tlc_mulitple>
 	Firsts: COMMA_T 
@@ -640,7 +660,7 @@
 
 <trailer>
 	Firsts: LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <try_stmt>
 	Firsts: TRY_T 
@@ -660,6 +680,10 @@
 
 <try_stmt_fin>
 	Firsts: FINALLY_T 
+	Follows: 
+
+<try_stmt_tail>
+	Firsts: FINALLY_T {} 
 	Follows: 
 
 <val_option>
@@ -684,27 +708,27 @@
 
 <with_item>
 	Firsts: LAMBDA_T NOT_T 
-	Follows: : COMMA_T {} 
+	Follows: COLON_T COMMA_T {} 
 
 <with_stmt>
 	Firsts: WITH_T 
 	Follows: 
 
 <with_stmt_tail>
-	Firsts: : COMMA_T {} 
-	Follows: : 
+	Firsts: COLON_T COMMA_T {} 
+	Follows: COLON_T 
 
 <xor_expr>
-	Firsts: IDENT_T LBRACE_T LBRACKET_T LPAREN_T PERIOD_T 
-	Follows: AND_T COMMA_T CR_T IN_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Firsts: '`' '~' IDENT_T LBRACE_T LBRACKET_T LPAREN_T MINUS_T PLUS_T 
+	Follows: '|' AND_T COMMA_T IN_T OR_T {} 
 
 <yexpr_testlistcomp>
 	Firsts: LPAREN_T 
-	Follows: '<<' '>>' AND_T COMMA_T CR_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MULT_T NL_T OR_T PERIOD_T {} ‘,’ ‘;’ 
+	Follows: '&' '<<' '>>' '^' '|' AND_T COMMA_T DIV_T EXPON_T IDIV_T IN_T LBRACKET_T LPAREN_T MINUS_T MOD_T MULT_T OR_T PERIOD_T PLUS_T {} 
 
 <yield_expr>
 	Firsts: YIELD_T 
-	Follows: CR_T NL_T RPAREN_T {} ‘,’ ‘;’ 
+	Follows: RPAREN_T 
 
 <yield_option>
 	Firsts: RPAREN_T YIELD_T {} 
@@ -712,5 +736,5 @@
 
 <yield_stmt>
 	Firsts: YIELD_T 
-	Follows: CR_T NL_T {} ‘,’ ‘;’ 
+	Follows: 
 

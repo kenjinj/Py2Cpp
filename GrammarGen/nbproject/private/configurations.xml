@@ -28,8 +28,9 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" Grammar.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" input.txt</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" Grammar.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" input.txt</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

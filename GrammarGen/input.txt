@@ -1,0 +1,338 @@
+<file_input> -> NL_T <file_input>
+<file_input> -> <stmt> <file_input>
+<file_input> -> EOF_T
+<decorator> AT_T <dotted_name> <d_option> NL_T 
+<d_option> -> {}
+<d_option> -> LPAREN_T <dec_arglist> RPAREN_T
+<dec_arglist> -> {}
+<dec_arglist> -> <arglist>
+<decorators> -> <decorator> <d_option>
+<d_option> -> <decorator> <d_option>
+<decorated> -> <decorators> <def_o>
+<def_o> -> <classdef>
+<def_o> -> <funcdef>
+<funcdef> -> DEF_T IDENT_T <parameters> COLON_T <suite>
+<parameters> -> LPAREN_T <val_option> RPAREN_T
+<val_option> -> {}
+<val_option> -> <varargslist> 
+<varaglist> -> <V1> MULT_T  IDENT_T <V2_V3>
+<V2_V3> -> <V2>
+<V2_V3> -> <V3>
+<V1> -> <fpdef> <V0> COMMA_T <V1>
+<V1> -> {}
+<V0> -> {}
+<V0> -> ASSIGN_T <test>
+<V2> -> MULT_T  IDENT_T <V4>
+<V2> -> EXP_T IDENT_T
+<V4> -> {}
+<V4> -> COMMA_T EXP_T IDENT_T
+<V3> -> <fpdef> <V5> <V6> <optComma>
+<V5> -> {}
+<V5> -> ASSIGN_T <test>
+<V6> -> {}
+<V6> -> COMMA_T <fpdef> <V7> <V6>
+<V7> -> {}
+<V7> -> ASSIGN_T <test>
+<optComma> -> {}
+<optComma> -> COMMA_T
+<fpdef> -> IDENT_T
+<fpdef> -> LPAREN_T <fplist> RPAREN_T
+<fplist> -> <fpdef> <fpdef_opt> <optComma>
+<fpdef_opt> -> {}
+<fpdef_opt> -> COMMA_T <fpdef> <fpdef_opt>
+<stmt> -> <simple_stmt>
+<stmt> -> <compound_stmt>
+<augassign> -> MINUSEQ_T
+<augassign> -> MULTEQ_T
+<augassign> -> DIVEQ_T
+<augassign> -> MODEQ_T
+<augassign> -> EXPEQ_T
+<augassign> -> IDIV_T
+<print_stmt> -> PRINT_T <print_tail>
+<print_tail> -> <optprint_tail>
+<print_tail> -> '>>' <test><print_element>
+<optprint_tail> -> {}
+<optprint_tail> -> <test> <print_rec><optcomma>
+<print_rec> -> COMMA_T <test> <print_rec>
+<print_rec> -> COMMA_T <test>
+<print_element> -> COMMA_T <test> <print_element> <optcomma>
+<print_element> -> COMMA_T <test> <optcomma>
+<opt_print_element> -> <print_element>
+<opt_print_element> -> {}
+<del_stmt> -> DEL_T <exprlist>
+<pass_stmt> -> PASS_T
+<flow_stmt> -> <break_stmt>
+<flow_stmt> -> <continue_stmt>
+<flow_stmt> -> <return_stmt>
+<flow_stmt> -> <raise_stmt>
+<flow_stmt> -> <yield_stmt>
+<break_stmt> -> BREAK_T
+<continue_stmt> -> CONT_T
+<return_stmt> -> RETURN_T <opt_testlist>
+<opt_testlist> -> <test_list>
+<opt_testlist> -> {}
+<simple_stmt> -> <small_stmt> <opt_tail> <optsemi>NL_T
+<simple_stmt> -> <small_stmt> <opt_tail> <optsemi>CR_T
+<opt_tail > -> COMMA_T <small_stmt>
+<opt_tail > -> {}
+<optsemi> -> SEMI_T
+<optsemi> -> {}
+<small_stmt> -> <expr_stmt>
+<small_stmt> -> <print_stmt>
+<small_stmt> -> <del_stmt>
+<small_stmt> -> <pass_stmt>
+<small_stmt> -> <flow_stmt>
+<small_stmt> -> <import_stmt>
+<small_stmt> -> <global_stmt>
+<small_stmt> -> <exec_stmt>
+<small_stmt> -> <assert_stmt>
+<expr_stmt> -> <testlist>
+<testlist> -> <augassign> <yield_expr>
+<testlist> -> <augassign> <testlist>
+<testlist> -> ASSIGN_T <yield_expr>
+<testlist> -> ASSIGN_T <testlist>
+<testlist> -> {}
+<yield_stmt> -> <yield_expr>
+<raise_stmt> -> RAISE_T
+<raise_stmt1> -> RAISE_T <test>
+<raise_stmt2> -> RAISE_T <test> COMMA_T <test>
+<raise_stmt3> -> RAISE_T <test> COMMA_T <test> COMMA_T <test>
+<import_stmt> -> <import_name>
+<import_stmt> -> <import_from>
+<import_name> -> IMPORT_T <dotted_as_name>
+<import_from> -> FROM_T <options1> IMPORT_T <options2>
+<options1> -> <options3> <dotted_name>
+<options1> -> PERIOD_T <options3>
+<options2> -> MULT_T
+<options2> -> LPAREN_T <import_as_names> RPAREN_T
+<options2> -> <import_as_names>
+<options3> -> PERIOD_T <options3>
+<options3> -> {}
+<import_as_name> -> IDENT_T
+<import_as_name1> -> IDENT_T AS_T IDENT_T
+<dotted_as_name> -> <dotted_name>
+<dotted_as_name> -> AS_T IDENT_T
+<import_as_names> -> <import_as_name> 
+<import_as_names> -> COMMA_T <import_as_name>
+<import_as_names1> -> COMMA_T <import_as_name> COMMA_T
+<dotted_as_names> -> <dotted_as_name>
+<dotted_as_names> -> COMMA_T <dotted_as_name>
+<dotted_name> -> IDENT_T <dotted_name_period>
+<dotted_name_period> -> PERIOD_T IDENT_T <dotted_name_period>
+<dotted_name_period> -> {}
+<global_stmt> -> GLOBAL_T IDENT_T <global_stmt_tail>
+<global_stmt_tail> -> COMMA_T IDENT_T <global_stmt_tail>
+<global_stmt_tail> -> LAMBDA_T
+<exec_stmt> -> EXEC_T <expr> <exec_stmt_tail>
+<exec_stmt_tail> -> IN_T <test> <exec_stmt_tail_tail>
+<exec_stmt_tail_tail> -> COMMA_T <test>
+<exec_stmt_tail> -> {}
+<exec_stmt_tail_tail> -> {}
+<assert_stmt> -> ASSERT_T <test> <assert_stmt_tail>
+<assert_stmt_tail> -> COMMA_T <test>
+<assert_stmt_tail> -> {}
+<compund_stmt> -> <if_stmt>
+<compund_stmt> -> <while_stmt>
+<compund_stmt> -> <for_stmt>
+<compund_stmt> -> <try_stmt>
+<compund_stmt> -> <with_stmt>
+<compund_stmt> -> <funcdef>
+<compund_stmt> -> <class>
+<compund_stmt> -> <def>
+<compund_stmt> -> <decorated>
+<if_stmt> -> IF_T <test> COLON_T <suite> <else_stmt>
+<else_stmt> -> ELSE_T COLON_T <suite>
+<else_stmt> -> {}
+<while_stmt> -> WHILE_T <test> COLON_T <suite> <else_stmt>
+<with_item> -> <test> <test_tail>
+<test_tail> -> AS_T <expo>
+<test_tail> -> {}
+<with_stmt> -> WITH_T <with_time> <with_stmt_tail> COLON_T <suite>
+<with_stmt_tail> -> COMMA_T <with_item> <with_stmt_tail>
+<with_stmt_tail> -> {}
+<try_stmt> -> TRY_T COLON_T <suite> <try_stmt_tail> 
+<try_stmt_tail> -> <try_stmt_excp> <try_stmt_excp_tail>
+<try_stmt_tail> -> <try_stmt_fin> 
+<try_stmt_excp> -> <except_clause> COLON_T <suite>
+<try_stmt_excp> -> {}
+<try_stmt_excp_tail> -> <try_stmt_else> <try_stmt_fin>
+<try_stmt_excp_tail> -> <try_stmt_fin>
+<try_stmt_excp_tail> -> {}
+<try_stmt_else> -> ELSE_T COLON_T <suite>
+<try_stmt_fin> -> FINALLY_T COLON_T <suite>
+<except_clause> -> <except> <except_clause_test>
+<except_clause_test> -> <test>
+<except_clause_test> -> <test> AS_T <test>
+<except_clause_test> -> <test> COMMA_T <test>
+<suite> -> <simple_stmt>
+<suite> -> NL_T INDENT <stmt_list> DEDENT
+<stmt_list> -> <stmt> <stmt_list_tail>
+<stmt_list_tail> -> <stmt_list>
+<stmt_list_tail> -> {}
+<testlist_safe> -> <old_test> <testlist_safe_old_test_option>
+<testlist_safe_old_test_option> -> <testlist_safe_old_test_list>
+<testlist_safe_old_test_option> -> {}
+<testlist_safe_old_test_list> -> COMMA_T <old_test> <testlist_safe_old_test_lst_tail>
+<testlist_safe_old_test_lst_tail> -> <testlist_safe_old_test_list>
+<testlist_safe_old_test_lst_tail> -> <comma>
+<old_test> -> <or_test>
+<old_test> -> <old_lambdef>
+<old_lambfef> -> LAMBDA_T <vargslist_option> COLON_T <old_test>
+<vargslist_optioin> -> <vargslist>
+<vargslist_option> -> {}
+<test> -> <or_test> <if_else_test_option>
+<test> -> <lambdef>
+<if_else_test_option> -> IF_T <or_test> ELSE_T <test>
+<if_else_test_option> -> {}
+<or_test> -> <and_test> <or_and_test_list_option_>
+<or_and_test_list_option> -> OR_T <and_test> <or_and_test_list_option>
+<or_and_test_list_option> -> {}
+<and_test> -> <not_test> <and_not_test_list_option>
+<and_not_test_list_option> -> AND_T <and_test> <and_not_test_list_option>
+<and_not_test_list_option> -> {}
+<not_test> -> NOT_T <not_test>
+<not_test> -> <comparison>
+<comparison> -> <expr> <comp_op_expr_list_option>
+<comp_op_expr_list_option> -> {}
+<comp_op> -> LT_T
+<comp_op> -> GT_T
+<comp_op> -> EQUAL_T
+<comp_op> -> GTE_T
+<comp_op> -> LTE_T
+<comp_op> -> NOTEQ_T
+<comp_op> -> IN_T
+<comp_op> -> NOT_T IN_T
+<comp_op> -> IS_T
+<comp_op> -> IS_T NOT_T
+<expr> -> <xor_epr> <expr_xor_expr>
+<expr_xor_expr> -> '|' <xor_expr> <expr_xor_expr>
+<expr_xor_expr> -> {}
+<xor_expr> -> <and_expr> <expr_and_expr>
+<expr_and_expr> -> '^' <and_expr><expr_and_expr>
+<expr_and_expr> -> {}
+<and_expr> -> <shift_expr> <expr_shift_expr>
+<expr_shift_expr> -> '&' <shift_expr> <expr_shift_expr>
+<expr_shift_expr> -> {}
+<shift_expr> -> <arith_expr> <expr_arith_expr>
+<expr_arith_expr> -> <shift_dir> <arith_expr> <expr_arith_expr>
+<shift_dir> -> '<<'
+<shift_dir> -> '>>'
+<expr_arith_expr> -> {}
+<arith_expr> -> <term> <expr_term>
+<expr_term> -> <plus_or_minus> <term> <expr_term>
+<plus_or_minus> -> PLUS_T
+<plus_or_minus> -> MINUS_T
+<expr_term> -> {}
+<term> -> <factor> <expr_factor>
+<expr_factor> -> <operator> <factor> <expr_factor>
+<operator> -> MULT_T
+<operator> -> DIV_T
+<operator> -> IDIV_T
+<operator> -> MOD_T
+<expr_factor> -> {}
+<factor> -> <factor_options> <factor>
+<factor> -> <power>
+<factor_options> -> PLUS_T
+<factor_options> -> MINUS_T
+<factor_options> -> '~'
+<power> -> <atom> <recursive_trailer> <opt_expon_fact>
+<recursive_trailer> -> <trailer> <recursive_trailer>
+<recursive_trailer> -> {}
+<opt_expon_fact> -> EXPON_T <factor>
+<opt_expon_fact> -> {}
+<atom> -> <yexpr_testlistcomp>
+<atom> -> <listmaker_opt>
+<atom> -> <dictorsetmaker_opt>
+<atom> -> <testlist_1>
+<atom> -> IDENT_T
+<atom> -> <numlit>
+<atom> -> <strlit> <string_more>
+<string_more> -> <strlit>
+<string_more> -> {}
+<yexpr_testlistcomp> -> LPAREN_T <yield_option> RPAREN_T
+<yield_option> -> <yield_expr>
+<yield_option> -> <test_list_comp>
+<yield_option> -> {}
+<listmaker_opt> -> LBRACKET_T <list_mak_o> RBRACKET_T
+<list_mak_o> -> <listmaker>
+<list_mak_o> -> {}
+<dictorsetmaker_opt> -> LBRACE_T <DSM_O> RBRACE_T
+<DSM_O> -> <dictorsetmaker>
+<DSM_O> -> {}
+<testlist_1> -> '`' <testlist1> '`'
+<listmaker> -> <test> <test_options>
+<test_options> -> <list_for>
+<test_options> -> <many_test> <optional_comma>
+<many_test> -> COMMA_T <test> <many test>
+<many_test> -> {}
+<testlist_comp> -> <test> <tlc_options>
+<tlc_options> -> <comp_for>
+<tlc_options> -> <tlc_multiple> <optcomma>
+<tlc_mulitple> -> COMMA_T <test> <tlc_multiple>
+<tlc_multiple> -> {}
+<lambdef> -> LAMBDA_T <optvarargslist> COLON_T <test>
+<trailer> -> LPAREN_T <optargslist> RPAREN_T
+<trailer> -> LBRACKET_T <subscriptlist> RBRACKET_T
+<trailer> -> PERIOD_T <IDENT_T>
+<subscriptlist> -> <subscript> <sub_multiple> <optcomma>
+<sub_multiple> -> COMMA_T <subscript> <sub_multiple>
+<sub_multiple> -> {}
+<subscript> -> PERIOD_T PERIOD_T PERIOD_T
+<subscript> -> <test>
+<subscript> -> <opttest> COLON_T <opttest> <optsliceop>
+<sliceop> -> COLON_T <opttest>
+<exprlist> -> <expr> <expr_multiple> <optcomma>
+<expr_multiple> -> COMMA_T <expr> <expr_multiple>
+<expr_multiple> -> {}
+<testlist> -> <test> <test_multiple> <optcomma>
+<test_multiple> -> COMMA_T <test> <test_multiple>
+<test_multiple> -> {}
+<dictorsetmaker> -> <dictor_option1> <dictor_option2>
+<dictor_option1> -> <test> COLON_T <test> <option1_options>
+<option1_options> -> <comp_for>
+<option1_options> -> <option1_multiple> <optcomma>
+<option1_multiple> -> COMMA_T <test> COLON_T <test> <option1_multiple>
+<option1_multiple> -> {}
+<dictor_option2> -> <test> <option2_options>
+<option2_options> -> <comp_for>
+<option2_options> -> <option2_multiple> <optcomma>
+<option2_multiple> -> COMMA_T <test>
+<option2_mulitple> -> {}
+<classdef> -> CLASS_T <IDENT_T> <opt_test> COLON_T <suite>
+<opt_test> -> LPAREN_T <opttestlist> RPAREN_T
+<opt_test> -> {}
+<arglist> -> <arglist_o1> <arglist_o2>
+<arglist_o1> -> <argument> COMMA_T <arglist_o1>
+<arglist_o1> -> {}
+<arglist_o2> -> <argument> <optcomma>
+<arglist_o2> -> MULT_T <test> <arglis_o2_o1> <arglist_o2_o2>
+<arglist_o2> -> EXP_T <test>
+<argument> -> <argument_tail1>
+<argument> -> <argument_tail2>
+<argument_tail1> -> <test> <comp_for_o>
+<argument_tail2> -> <test> ASSIGN_T <test>
+<comp_for_o> -> <comp_for>
+<comp_for_o> -> {}
+<list_iter> -> <list_for>
+<list_iter> -> <list_if>
+<list_for> -> FOR_T <exprlist> IN_T <testlist_safe> <list_iter_o>
+<list_iter_o> -> <list_iter>
+<list_iter_o> -> {}
+<list_if> -> IF_T <old_test> <list_iter_o>
+<comp_iter> -> <comp_for>
+<comp_iter> -> <comp_if>
+<comp_for> -> FOR_T <exprlist> IN_T <or_test> <comp_iter_o>
+<comp_iter_o> -> <comp_iter>
+<comp_iter_o> -> {}
+<comp_if> -> IF_T <old_test> <comp_iter_o>
+<testlist1> -> <test> <testlist1_o>
+<testlist1_o> -> COMMA_T <test> <testlist1_o>
+<testlist1_o> -> {}
+<encoding_decl> -> IDENT_T
+<yield_expr> -> YIELD_T <testlist_o>
+<testlist_o> -> <testlist>
+<testlist_o> -> {}
+<arglist_o2_o1> -> COMMA_T <argument> <arglist_o2_o1>
+<arglist_o2_o1> -> {}
+<arglist_o2_o2> -> COMMA_T MULT_T <test>
+<arglist_o2_o2> -> {}

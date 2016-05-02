@@ -105,7 +105,7 @@ void ruleB(int listIndex){
 void ruleC(int listIndex){
     // For rules that only go to empty set (lambda), the start of rules(index) follow set is also in firsts set
     if (inputList[listIndex].results.size() == 1){
-        if (inputList[listIndex].results[0] == "{}" || inputList[listIndex].results[0] == "LAMBDA_T"){
+        if (inputList[listIndex].results[0] == "{}"){
             int index = findKeyIndex(inputList[listIndex].start);
             if (index != -1){
                 for (int i = 0; i < ruleList[index].follows.size(); i++){
@@ -212,16 +212,15 @@ int main(int argc, char** argv) {
     
     string line = "";
     vector<string> temp;
-    // Grammar.part1 : <file_input> -> NL_T <file_input>
+    // <file_input> -> NL_T <file_input>
     // get input from in file
     getline(input, line);
     fprintf(report, "Input format:\n%s\n\n", line.c_str());
     while (!input.fail()){
         temp = split(line, ' ');
-        current.start = temp[2];
+        current.start = temp[0];
         // erase
-        temp.erase (temp.begin(), temp.begin()+4);
-        //if (!temp[0].empty()) temp.erase(temp.begin());
+        temp.erase (temp.begin(), temp.begin()+2);
         current.results = temp;
         // add to vector
         inputList.push_back(current);
@@ -267,7 +266,7 @@ int main(int argc, char** argv) {
     }
     fprintf(report, "F&F-dependent Report (Rules E, F):\n\t%d new follows\n", eCount + fCount);
     
-    /* Initial follows found */
+    // Initial follows found 
     fprintf(report, "Initial set of follows found\n");
     
     // Find firsts dependent on follows, need to recheck after final follows
@@ -276,7 +275,7 @@ int main(int argc, char** argv) {
     }
     fprintf(report, "Follows-dependent Report (Rule C):\n\t%d new firsts\n", cCount);
     
-    /* Initial firsts found */
+    // Initial firsts found 
     fprintf(report, "Initial set of firsts found\n");
     
     // Find remaining F&F with inter dependencies, finished when no change detected
